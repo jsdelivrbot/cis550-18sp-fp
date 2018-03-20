@@ -33,11 +33,13 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (request, response) {
   response.sendFile(path.join(__dirname, '/views', 'firstPage.html'));
 });
-
+app.get('/searchBox.js', function (request, response) {
+  response.sendFile(path.join(__dirname, '/public', 'searchBox.js'));
+});
 app.listen(app.get('port'), function () {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
-
+//npm start
 // TODO： when to end the connection?
 // connection.end(function (err) {
 //   // The connection is terminated now

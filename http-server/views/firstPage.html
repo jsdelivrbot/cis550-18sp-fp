@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-  <body>
-    <p>Hello World!</p>
-  </body>
+<head>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/searchBox.js"></script>
+</head>
+
+<body ng-app="searchBox">
+  <h1>University Recommendation</h1>
+  <div ng-controller="searchBoxController">
+  <p>Input your SAT score:</p>
+  <input type="text" ng-model="searchText" </td>
+  <p>University Rank Range:</p>
+  <input type="text" maxlength="3" size="3" ng-model="lowerBound" </td>
+  -
+  <input type="text" maxlength="3" size="3" ng-model="upperBound" </td>
+  <button ng-click="update(searchText, lowerBound, upperBound);">Search!</button>
+  </div>
+</body>
 
 </html>
