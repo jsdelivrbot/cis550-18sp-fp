@@ -1,0 +1,39 @@
+body {
+	background-color: MediumSeaGreen;
+}
+
+h1 {
+	font-size: 30px;
+  font-family: Impact, Charcoal, sans-serif;
+	text-align: center;
+	color: white;
+	margin-top: 6%;
+}
+
+.container {
+	margin-top: 4%;
+}
+
+.table {
+  background-color: white;
+  width: 90%;
+}
+
+tr {
+  height: 40px;
+}
+
+th {
+  color: Green;
+  font-size: 15px;
+}
+
+td {
+  color: Green;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.btn {
+  background: MediumSeaGreen;
+}
