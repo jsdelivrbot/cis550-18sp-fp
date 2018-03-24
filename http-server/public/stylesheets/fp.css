@@ -1,0 +1,27 @@
+body {
+	background-color: MediumSeaGreen;
+}
+
+h1 {
+	font-size: 60px;
+  font-family: Impact, Charcoal, sans-serif;
+	text-align: center;
+	color: white;
+	margin-top: 18%;
+}
+
+.container {
+	margin-top: 8%;
+}
+
+.input-group {
+	width: 500px;
+	border-color: MediumSeaGreen;
+}
+
+.btn {
+	width: 500px;
+	background-color: white;
+	color: MediumSeaGreen;
+	border-color: MediumSeaGreen;
+}
