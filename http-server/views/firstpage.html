@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="USuniversity">
+    <head>
+        <title>U.S. university selection</title>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/public/javascripts/app.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../public/stylesheets/fp.css">
+    </head>
+    <body>
+        <header>
+            <h1> Find your dream school </h1>
+        </header>
+        <div class="container" ng-controller="searchController">
+            <center>
+	          <form role="form">
+		            <div class="input-group">
+			              <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+			              <input type="text" class="form-control" placeholder="Enter your SAT score" ng-model="sat">
+		            </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-arrow-up"></i></span>
+                    <input type="text" class="form-control" placeholder="University rank upper limit" ng-model="upperLimit">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-arrow-down"></i></span>
+                    <input type="text" class="form-control" placeholder="University rank lower limit" ng-model="lowerLimit">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg btn-block" ng-click="Submit()">
+                    <span class="glyphicon glyphicon-search"></span> Search
+                </button>
+	          </form>
+            </center>
+        </div>
+    </body>
+</html>
