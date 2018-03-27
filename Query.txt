@@ -1,0 +1,25 @@
+Query1:
+Input: $scope.sat+'&'+$scope.upperLimit+'&'+$scope.lowerLimit
+Output: University Name, Rank, City, Adm rate, sat_avrg, rul
+
+
+
+Query2:
+Input: University Name
+Output: All information about this University in Subject
+
+Query3:
+Input: University Name
+Output: All information about this University in Subject
+
+Query4:
+Input: University Name
+Output: All information about this University in Living_cost
+
+Query5:
+Input: University Name
+Output: All information about this University in Crime
+
+Query6:
+Input: University Name
+Output: All information about this University in Company
