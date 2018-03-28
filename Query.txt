@@ -3,7 +3,7 @@ Input: $scope.sat+'&'+$scope.upperLimit+'&'+$scope.lowerLimit
 Output: University Name, Rank, City, Adm rate, sat_avrg, rul
 
 SELECT univ_name, rank, city, adm_rate, sat_avg, url
-FROM University u NATURAL JOIN admission a
+FROM University NATURAL JOIN Admission
 WHERE sat_avg < ? AND rank <= ? AND rank >= ?;
 
 Query2:
@@ -18,8 +18,8 @@ Query3:
 Input: University Name
 Output: All information about this University in Living_cost
 
-SELECT *
-FROM Living_cost
+SELECT city, living_cost_index, rent_index, groceries_index, restaurant_price_index
+FROM Living_cost NATURAL JOIN University
 WHERE univ_name = ?;
 
 Query4:
@@ -34,6 +34,6 @@ Query5:
 Input: University Name
 Output: All information about this University in Company
 
-SELECT *
-FROM Company
+SELECT comp_name, city, state, industry, comp_url
+FROM Company NATURAL JOIN University
 WHERE univ_name = ?;
