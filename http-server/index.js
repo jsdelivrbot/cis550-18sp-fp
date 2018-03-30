@@ -5,10 +5,11 @@ var mysql = require('mysql');
 /*-----------------------------------------------------*/
 // Connect to the Database
 var connection = mysql.createConnection({
-  host: 'fling.seas.upenn.edu',
-  user: 'kuangda',
-  password: 'kwbJqcvxrN9Nx',
-  database: "kuangda"
+  host: 'cis550project.cpqrgrawy8bo.us-east-2.rds.amazonaws.com',
+  port: 3306,
+  user: 'cis550project',
+  password: 'wyuVj[x^e.x9i',
+  database: "cis550fp"
 });
 
 connection.connect(function (err) {
@@ -33,9 +34,26 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function (request, response) {
   response.sendFile(path.join(__dirname, '/views', 'firstPage.html'));
 });
-app.get('/searchBox.js', function (request, response) {
-  response.sendFile(path.join(__dirname, '/public', 'searchBox.js'));
+app.get('/app.js', function (request, response) {
+  response.sendFile(path.join(__dirname, '/public/javascripts', 'app.js'));
 });
+
+app.get('/app.js', function (request, response) {
+  response.sendFile(path.join(__dirname, '/public/javascripts', 'app.js'));
+});
+
+// TODO: test aws query here
+// app.get('/secondpage/:input'){
+//   connection.query({
+//     sql: 'SELECT univ_name, rank, city, adm_rate, sat_avg, url FROM University u NATURAL JOIN admission a WHERE sat_avg < ? AND rank <= ? AND rank >= ?;', values: [parameter]
+//   }, function (err, results, fields) {
+//     console.log("Sent query.");
+//     if (err) throw err;
+//     console.log(results);
+//     response.json(results);
+//   });
+// }
+
 app.listen(app.get('port'), function () {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
