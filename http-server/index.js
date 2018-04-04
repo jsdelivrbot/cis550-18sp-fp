@@ -43,7 +43,6 @@ app.get('/universitylist',function(request, response) {
 });
 
 app.get('/universitylist/:sat/:upperLimit/:lowerLimit', function(request,response){
-  console.log("something here??");
   var mysql = require('mysql');
   var connection = mysql.createConnection({
     host: 'cis550project.cpqrgrawy8bo.us-east-2.rds.amazonaws.com',
@@ -59,7 +58,6 @@ app.get('/universitylist/:sat/:upperLimit/:lowerLimit', function(request,respons
   connection.connect(function(err){
   if (err) throw err;
   //if (sat!='undefined' & upperLimit!='undefined' & lowerLimit!='undefined')
-    console.log(query);
     connection.query(query, function (err, result, fields) {
     if (err) throw err;
     response.json(result);
