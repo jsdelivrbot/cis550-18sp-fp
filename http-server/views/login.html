@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>U.S. university selection</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<header>
+    <h1> Test Facebook login-button </h1>
+</header>
+
+<body>
+    <script>
+        // Insert the following code snippet directly after the opening `<body>` tag on each page you want to use Facebook Analytics. 
+        // Replace `{your-app-id}` with the App ID and `{latest-api-version}` with the SDK version
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2075755972705489',
+                cookie: true,
+                xfbml: true,
+                version: 'v2.12'
+            });
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function statusChangeCallback(response) {
+            if (response.status === 'connected') {
+                console.log('Logged in');
+            } else {
+                console.log('Not authenticated');
+            }
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+    </script>
+
+    <fb:login-button scope="public_profile" onlogin="checkLoginState();">
+    </fb:login-button>
+</body>
+
+</html>

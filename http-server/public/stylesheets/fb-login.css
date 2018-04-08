@@ -1,0 +1,12 @@
+#fb-btn {
+    /* display: none */
+}
+
+#profile,
+#logout {
+    display: none
+}
+
+#logout {
+    display: block
+}
