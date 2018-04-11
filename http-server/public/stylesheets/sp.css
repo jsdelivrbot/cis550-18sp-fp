@@ -1,39 +1,64 @@
 body {
-	background-color: MediumSeaGreen;
+	/* background-color: silver; */
 }
 
 h1 {
 	font-size: 30px;
   font-family: Impact, Charcoal, sans-serif;
 	text-align: center;
-	color: white;
+	color: rgba(50,20,130,0.5);
 	margin-top: 6%;
 }
 
-.container {
+/* .container {
 	margin-top: 4%;
-}
+} */
 
-.table {
-  background-color: white;
-  width: 90%;
+#univ_table
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	margin: 20px;
+	width: 1000px;
+	text-align: left;
+	border-collapse: collapse;
+	background: url('https://localhost:5000/patternb.png');
 }
-
-tr {
-  height: 40px;
+#univ_table thead tr
+{
+	background: url('https://localhost:5000/patternb-head.png');
 }
-
-th {
-  color: Green;
-  font-size: 15px;
+#univ_table th
+{
+	font-size: 15px;
+	font-weight: normal;
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #039;
 }
-
-td {
-  color: Green;
-  font-size: 13px;
-  vertical-align: middle;
+#univ_table td
+{
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+#univ_table tbody tr:hover td
+{
+	color: #339;
+	background: #cdcdee;
 }
 
 .btn {
-  background: MediumSeaGreen;
+  background: rgba(50,20,130,0.5);
+	border-color: rgba(50,20,130,0.5);
+}
+
+#dropdown {
+	width: 80px;
+	height: 50px;
+	margin: 30px;
+	background-color: rgba(50,20,130,0.5);
+	color: white;
+	position: absolute;
 }

@@ -5,46 +5,80 @@
     <title>U.S. university selection</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="/app.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://localhost:5000/sp.css">
 </head>
 
-<body>
+<body  ng-controller="tempController">
     <header>
         <h1> Find your dream school </h1>
     </header>
-    <center>
-        <div ng-controller="tempController" class="container">
-            <table class="table table-striped">
+        <div class="container">
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                    sort by<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#" ng-click="rank()">rank</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#" ng-click="admRate()">addmission rate</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#" ng-click="crime()">crime number</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#" ng-click="cost()">living cost</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation">
+                    <a role="menuitem" tabindex="-1" href="#" ng-click="comNum()">company number</a>
+                </li>
+                </ul>
+            </div>
+            <!-- <table class="table table-striped"> -->
+            <center>
+            <table id="univ_table">
                 <thead>
                     <tr>
-                        <th> University </th>
-                        <th> Rank </th>
-                        <th> City </th>
-                        <th> Admission Rate </th>
-                        <th> SAT Average </th>
-                        <th> Official Website </th>
-                        <th> Learn More </th>
+                        <th id="univ_name_h" display="inline" scope="col"> University </th>
+                        <th id="total_number_h" display="inline" scope="col"> Crime number </th>
+                        <th id="living_cost_h" display="inline" scope="col"> Living cost </th>
+                        <th id="company_num_h" display="inline" scope="col"> Company number </th>
+                        <th id="rank_h" display="inline" scope="col"> Rank </th>
+                        <th id="city_h" display="inline" scope="col"> City </th>
+                        <th id="adm_rate_h" display="inline" scope="col"> Admission Rate </th>
+                        <th id="sat_avg_h" display="inline" scope="col"> SAT Average </th>
+                        <th id="website_h" display="inline" scope="col"> Official Website </th>
+                        <th id="learn_h" display="inline" scope="col"> Learn More </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in data">
-                        <td> {{x.univ_name}} </td>
-                        <td> {{x.rank}} </td>
-                        <td> {{x.city}} </td>
-                        <td> {{x.adm_rate}} </td>
-                        <td> {{x.sat_avg}} </td>
+                        <td id="univ_name" display="inline"> {{x.univ_name}} </td>
+                        <td id="total_number" display="inline"> {{x.total_number}} </td>
+                        <td id="living_cost" display="inline"> {{x.living_cost_index}} </td>
+                        <td id="company_num" display="inline"> {{x.company_num}} </td>
+                        <td id="rank" display="inline"> {{x.rank}} </td>
+                        <td id="city" display="inline"> {{x.city}} </td>
+                        <td id="adm_rate" display="inline"> {{x.adm_rate}} </td>
+                        <td id="sat_avg" display="inline"> {{x.sat_avg}} </td>
                         <td>
-                            <a href="https://{{x.univ_url}}">{{x.univ_url}}</a>
+                            <a href="https://{{x.univ_url}}" id="website" display="inline">{{x.univ_url}}</a>
                         </td>
                         <td>
                             <button type="button" class="btn btn-success" ng-click="Find()">Learn More</button>
-                            <td>
+                        </td>
                 </tbody>
             </table>
+            </center>
         </div>
-    </center>
 </body>
 
 </html>

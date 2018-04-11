@@ -56,17 +56,52 @@ app.get('/universitylist', function (request, response) {
   response.sendFile(path.join(__dirname, '/views', 'secondpage.html'));
 });
 
-app.get('/universitylist/:sat/:upperLimit/:lowerLimit', function (request, response) {
+app.get('/universitylist/:sat/:upperLimit/:lowerLimit/:sort', function (request, response) {
 
   var sat = request.params.sat;
   var upperLimit = request.params.upperLimit;
   var lowerLimit = request.params.lowerLimit;
-  var query = "SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url FROM cis550fp.University NATURAL JOIN cis550fp.Admission WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit + " order by rank ASC;";
+  var sort = request.params.sort;
+  var query;
+
+  if (sort === '1') {
+    query = " SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url" +
+            " FROM cis550fp.University NATURAL JOIN cis550fp.Admission" +
+            " WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit +
+            " ORDER BY rank ASC;";
+  }
+  else if (sort === '2') {
+    query = " SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url" +
+            " FROM cis550fp.University NATURAL JOIN cis550fp.Admission" +
+            " WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit +
+            " ORDER BY adm_rate DESC;";
+  }
+  else if (sort === '3') {
+    query = " SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url, total_number" +
+            " FROM cis550fp.University NATURAL JOIN cis550fp.Admission NATURAL JOIN cis550fp.Crime" +
+            " WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit +
+            " ORDER BY total_number ASC;";
+  }
+  else if (sort === '4') {
+    query = " SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url, living_cost_index" +
+            " FROM cis550fp.University NATURAL JOIN cis550fp.Admission NATURAL JOIN cis550fp.Living_cost" +
+            " WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit +
+            " ORDER BY living_cost_index ASC;";
+  }
+  else if (sort === '5') {
+    query = " SELECT univ_name, rank, u.city, adm_rate, sat_avg, univ_url, count(*) as company_num" +
+            " FROM cis550fp.University u NATURAL JOIN cis550fp.Admission JOIN cis550fp.Company c ON u.city = c.city" +
+            " WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit +
+            " GROUP BY univ_name"
+            " ORDER BY count(*) DESC;";
+  }
+
+
   connection.query(query, function (err, result, fields) {
     if (err) throw err;
     response.json(result);
   });
-})
+});
 
 app.get('/fp.css', function (request, response){
   response.sendFile(path.join(__dirname, '/public/stylesheets', 'fp.css'));
@@ -86,6 +121,14 @@ app.get('/fb-login.css', function (request, response){
 
 app.get('/sp.css', function (request, response){
   response.sendFile(path.join(__dirname, '/public/stylesheets', 'sp.css'));
+});
+
+app.get('/patternb.png', function (request, response){
+  response.sendFile(path.join(__dirname, '/public/images/patternb.png'));
+});
+
+app.get('/patternb-head.png', function (request, response){
+  response.sendFile(path.join(__dirname, '/public/images/patternb-head.png'));
 });
 //npm start
 // TODO： when to end the connection?
