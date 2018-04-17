@@ -48,12 +48,30 @@ app.get('/login', function (request, response) {
 app.get('/', function (request, response) {
   response.sendFile(path.join(__dirname, '/views', 'firstpage.html'));
 });
+
 app.get('/app.js', function (request, response) {
   response.sendFile(path.join(__dirname, '/public/javascripts', 'app.js'));
 });
 
 app.get('/universitylist', function (request, response) {
   response.sendFile(path.join(__dirname, '/views', 'secondpage.html'));
+});
+
+app.get('/details', function (request, response) {
+  response.sendFile(path.join(__dirname, '/views', 'thirdpage.html'));
+});
+
+app.get('/details/:name', function (request, response) {
+  var name = request.params.name;
+  name = decodeURI(name);
+  var query = " SELECT * " +
+              " FROM ( SELECT * FROM cis550fp.University WHERE univ_name = '" + name + "' ) a " +
+              "      NATURAL JOIN cis550fp.Subject s NATURAL JOIN cis550fp.Crime c ;"
+  console.log(query);
+  connection.query(query, function (err, result, fields) {
+    if (err) throw err;
+    response.json(result);
+  });
 });
 
 app.get('/universitylist/:sat/:upperLimit/:lowerLimit/:sort', function (request, response) {
@@ -129,6 +147,10 @@ app.get('/patternb.png', function (request, response){
 
 app.get('/patternb-head.png', function (request, response){
   response.sendFile(path.join(__dirname, '/public/images/patternb-head.png'));
+});
+
+app.get('/tp.css', function (request, response){
+  response.sendFile(path.join(__dirname, '/public/stylesheets', 'tp.css'));
 });
 //npm start
 // TODO： when to end the connection?
