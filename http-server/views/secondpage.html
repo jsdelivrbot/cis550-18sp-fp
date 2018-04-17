@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://localhost:5000/sp.css">
 </head>
 
-<body  ng-controller="tempController">
+<body ng-controller="tempController">
     <header>
         <h1> Find your dream school </h1>
     </header>
@@ -47,6 +47,7 @@
             <table id="univ_table">
                 <thead>
                     <tr>
+                        <th> Index </th>
                         <th id="univ_name_h" display="inline" scope="col"> University </th>
                         <th id="total_number_h" display="inline" scope="col"> Crime number </th>
                         <th id="living_cost_h" display="inline" scope="col"> Living cost </th>
@@ -61,6 +62,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="x in data">
+                        <td> {{$index + 1}} </td>
                         <td id="univ_name" display="inline"> {{x.univ_name}} </td>
                         <td id="total_number" display="inline"> {{x.total_number}} </td>
                         <td id="living_cost" display="inline"> {{x.living_cost_index}} </td>
@@ -69,12 +71,13 @@
                         <td id="city" display="inline"> {{x.city}} </td>
                         <td id="adm_rate" display="inline"> {{x.adm_rate}} </td>
                         <td id="sat_avg" display="inline"> {{x.sat_avg}} </td>
-                        <td>
+                        <td id="url">
                             <a href="https://{{x.univ_url}}" id="website" display="inline">{{x.univ_url}}</a>
                         </td>
-                        <td>
-                            <button type="button" class="btn btn-success" ng-click="Find()">Learn More</button>
+                        <td id="bt">
+                            <button id="test" type="button" class="btn btn-success" ng-click="Find($index)">Learn More</button>
                         </td>
+                     </tr>
                 </tbody>
             </table>
             </center>
