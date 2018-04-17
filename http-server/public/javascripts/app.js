@@ -10,6 +10,32 @@ app.controller('searchController', function ($scope, $http, $window) {
   };
 });
 
+app.controller('detailController', function ($scope, $http, $window) {
+  $http.get('/details/' + $window.sessionStorage.name).then(
+    function (response) {
+      $scope.data2 = response.data;
+      console.log($scope.data2);
+    }, function (response) {
+      console.log('err');
+    }
+  );
+
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var chartdata = google.visualization.arrayToDataTable([
+      ['task', 'subject distribution'],
+      ['Science', $scope.data2[0].science],
+      ['Engineering', $scope.data2[0].engineering],
+      ['Business', $scope.data2[0].business],
+      ['Liberal Arts', $scope.data2[0].liberal_arts]
+    ]);
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(chartdata);
+  }
+});
+
 app.controller('tempController', function ($scope, $http, $window) {
 
   httpGet();
@@ -28,6 +54,12 @@ app.controller('tempController', function ($scope, $http, $window) {
         console.log('err');
       });
   }
+
+  $scope.Find = function (index) {
+    $window.sessionStorage.name = $scope.data[index].univ_name;
+    $http.get('/details').then();
+    window.location = '/details';
+  };
 
   $scope.rank = function () {
     $window.sessionStorage.sort = '1';
