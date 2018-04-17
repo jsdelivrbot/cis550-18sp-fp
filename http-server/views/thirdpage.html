@@ -26,20 +26,19 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <p id="title1"> Subject Distribution </p>
+        <p class="title1"> Subject Distribution </p>
         <div id="piechart"></div>
       </div>
 
       <div class="item">
-        <p> Living cost </p>
+        <p class="title1"> Discription </p>
+        <p class="content"> {{data2[0].description}} </p>
+        <p class="content"> Official Website: <span <a href="https://{{data2[0].univ_url}}" id="website" display="inline">{{data2[0].univ_url}}</a> </span> </p>
       </div>
 
       <div class="item">
-        <p> Crime </p>
-      </div>
-
-      <div class="item">
-        <p> Company </p>
+        <p class="title1"> Crime </p>
+        <p class="content"> {{data2[0].total_number}} </p>
       </div>
     </div>
 
