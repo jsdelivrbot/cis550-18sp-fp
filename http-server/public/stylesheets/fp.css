@@ -1,5 +1,5 @@
 body {
-	background-color: MediumSeaGreen;
+	background-color: rgba(50,20,130,0.5);
 }
 
 h1 {
@@ -16,12 +16,12 @@ h1 {
 
 .input-group {
 	width: 500px;
-	border-color: MediumSeaGreen;
+	border-color: rgba(50,20,130,0.5);
 }
 
 .btn {
 	width: 500px;
 	background-color: white;
-	color: MediumSeaGreen;
-	border-color: MediumSeaGreen;
+	color: rgba(50,20,130,0.5);
+	border-color: rgba(50,20,130,0.5);
 }
