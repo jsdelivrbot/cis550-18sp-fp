@@ -75,8 +75,9 @@ h1 {
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 14px;
-	margin-top:30px;
-	margin-left:220px;
+	margin-top:auto;
+	margin-left:auto;
+	margin-right:auto;
 	width: 700px;
 	text-align: left;
 	border-collapse: collapse;
@@ -106,3 +107,12 @@ h1 {
 	color: #339;
 	background: #cdcdee;
 }
+
+.try{
+	margin-left:auto;
+	margin-right:auto;
+	height:500px;
+	width:800px;
+	overflow-y: auto;
+}
+
