@@ -17,7 +17,7 @@ h1 {
 #myCarousel {
 	margin: 10 50 10 500;
 	width: 1140px;
-  height: 600px;
+  height: 680px;
 }
 
 #piechart {
@@ -41,4 +41,40 @@ h1 {
 	color: rgba(30,20,100,0.5);
 	margin-top: 2%;
 	margin-left: 230px;
+}
+
+#comp
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 14px;
+	margin-top:30px;
+	margin-left:220px;
+	width: 700px;
+	text-align: left;
+	border-collapse: collapse;
+	background: url('https://localhost:5000/patternb.png');
+}
+#comp thead tr
+{
+	background: url('https://localhost:5000/patternb-head.png');
+}
+#comp th
+{
+	font-size: 15px;
+	font-weight: normal;
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+#comp td
+{
+	padding: 8px;
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid transparent;
+}
+#comp tbody tr:hover td
+{
+	color: #339;
+	background: #cdcdee;
 }

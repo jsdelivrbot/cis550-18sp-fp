@@ -65,9 +65,12 @@ app.get('/details', function (request, response) {
 app.get('/details/:name', function (request, response) {
   var name = request.params.name;
   name = decodeURI(name);
+  console.log(name);
   var query = " SELECT * " +
               " FROM ( SELECT * FROM cis550fp.University WHERE univ_name = '" + name + "' ) a " +
-              "      NATURAL JOIN cis550fp.Subject s NATURAL JOIN cis550fp.Crime c ;"
+              "      NATURAL JOIN cis550fp.Subject s NATURAL JOIN cis550fp.Crime c " +
+              "      JOIN cis550fp.Company com ON com.state = a.state " +
+              "      JOIN cis550fp.Living_cost lc ON lc.city = a.city;";
   console.log(query);
   connection.query(query, function (err, result, fields) {
     if (err) throw err;

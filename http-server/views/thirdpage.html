@@ -25,6 +25,7 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
+
       <div class="item active">
         <p class="title1"> Subject Distribution </p>
         <div id="piechart"></div>
@@ -39,6 +40,36 @@
       <div class="item">
         <p class="title1"> Crime </p>
         <p class="content"> {{data2[0].total_number}} </p>
+      </div>
+
+      <div class="item">
+        <p class="title1"> Company </p>
+        <table id="comp">
+          <thead>
+            <tr>
+              <th id="comp_name_h" display="inline" scope="col"> Company Name </th>
+              <th id="state_h" display="inline" scope="col"> State </th>
+              <th id="city_h" display="inline" scope="col"> City </th>
+              <th id="industry_h" display="inline" scope="col"> Industry </th>
+              <th id="url_h" display="inline" scope="col"> Company Website </th>
+            </tr>
+          <tbody>
+            <tr ng-repeat="x in data2">
+              <td id="comp_name" display="inline"> {{x.comp_name}} </td>
+              <td id="state" display="inline"> {{x.state}} </td>
+              <td id="city" display="inline"> {{x.city}} </td>
+              <td id="industry" display="inline"> {{x.industry}} </td>
+              <td id="comp_url">
+                <a href="https://{{x.comp_url}}" id="website" display="inline">{{x.comp_url}}</a>
+              </td>
+            </tr>
+          </tbody>
+      </table>
+      </div>
+
+      <div class="item">
+        <p class="title1"> Living Cost </p>
+        <p class="content"> {{data2[0].living_cost_index}} </p>
       </div>
     </div>
 
