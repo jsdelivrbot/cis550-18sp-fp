@@ -28,6 +28,7 @@ connection.connect(function (err) {
     return;
   }
   console.log('connected as id ' + connection.threadId);
+  console.log('Use https://localhost:5000 to login to System.');
 });
 /*-----------------------------------------------------*/
 // Application configuration set
@@ -110,7 +111,7 @@ app.get('/universitylist/:sat/:upperLimit/:lowerLimit/:sort', function (request,
     query = " SELECT univ_name, rank, u.city, adm_rate, sat_avg, univ_url, count(*) as company_num" +
             " FROM cis550fp.University u NATURAL JOIN cis550fp.Admission JOIN cis550fp.Company c ON u.city = c.city" +
             " WHERE sat_avg <=" + sat + " AND rank <=" + lowerLimit + " AND rank >=" + upperLimit +
-            " GROUP BY univ_name"
+            " GROUP BY univ_name" +
             " ORDER BY count(*) DESC;";
   }
 
