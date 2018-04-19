@@ -153,6 +153,14 @@ app.get('/patternb-head.png', function (request, response){
   response.sendFile(path.join(__dirname, '/public/images/patternb-head.png'));
 });
 
+app.get('/crime.jpeg', function (request, response){
+  response.sendFile(path.join(__dirname, '/public/images/crime.jpeg'));
+});
+
+app.get('/living.jpeg', function (request, response){
+  response.sendFile(path.join(__dirname, '/public/images/living.jpeg'));
+});
+
 app.get('/tp.css', function (request, response){
   response.sendFile(path.join(__dirname, '/public/stylesheets', 'tp.css'));
 });

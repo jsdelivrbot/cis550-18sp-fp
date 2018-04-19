@@ -39,7 +39,8 @@
 
       <div class="item">
         <p class="title1"> Crime </p>
-        <p class="content"> {{data2[0].total_number}} </p>
+        <img id="pic" src="https://localhost:5000/crime.jpeg" />
+        <p id="content2"> The crime number of this school is: {{data2[0].total_number}} </p>
       </div>
 
       <div class="item">
@@ -54,7 +55,7 @@
               <th id="url_h" display="inline" scope="col"> Company Website </th>
             </tr>
           <tbody>
-            <tr ng-repeat="x in data2">
+            <tr ng-repeat="x in data2 | limitTo:7">
               <td id="comp_name" display="inline"> {{x.comp_name}} </td>
               <td id="state" display="inline"> {{x.state}} </td>
               <td id="city" display="inline"> {{x.city}} </td>
@@ -69,7 +70,8 @@
 
       <div class="item">
         <p class="title1"> Living Cost </p>
-        <p class="content"> {{data2[0].living_cost_index}} </p>
+        <img id="pic" src="https://localhost:5000/living.jpeg" />
+        <p id="content3"> These indices are relative to New York City (NYC).<br> Which means that for New York City, each index should be 100(%).<br> This school has a living cost of {{data2[0].living_cost_index}} </p>
       </div>
     </div>
 
