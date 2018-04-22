@@ -78,6 +78,34 @@ app.get('/details/:name', function (request, response) {
   });
 });
 
+app.get('/company',function(request,response){
+	
+  MongoClient.connect("mongodb+srv://cis550:cis550@cis550-nosql-lkxnq.mongodb.net/test", function(err, db) {
+  if (err) {
+    console.log('Unable to connect to the Server', err);
+  } else {
+    // We are connected
+    console.log('Connection established to the mongoDB');
+ 
+    // Get the documents collection
+    var db = db.db('fp');
+    var collection = db.collection('test');
+	
+    collection.aggregate([{$unwind:"$jobs"},{$match:{"company":"$(this).comp_name"}},{$project:{"jobs.job":1,"jobs.loc":1}}]).toArray(function (err, result) {
+      if (err) {
+        console.log("Err: cannot find");
+      } else if (result.length) {
+        var obj_str = util.inspect(result);
+        console.log(obj_str);
+        response.send(JSON.stringify(obj_str));
+      } else {
+        console.log("Warning: No such doc.");
+      }
+    });
+  }
+});
+});
+
 app.get('/universitylist/:sat/:upperLimit/:lowerLimit/:sort', function (request, response) {
 
   var sat = request.params.sat;
