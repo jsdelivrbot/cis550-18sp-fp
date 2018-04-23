@@ -4,39 +4,10 @@ var pem = require('pem')
 var express = require('express');
 var path = require('path');
 var mysql = require('mysql');
-var MongoClient = require('mongodb').MongoClient;
-var util = require("util");
 
-// MongoClient.connect("mongodb+srv://cis550:cis550@cis550-nosql-lkxnq.mongodb.net/test", function(err, db) {
-//   if (err) {
-//     console.log('Unable to connect to the Server', err);
-//   } else {
-//     // We are connected
-//     console.log('Connection established to the mongoDB');
- 
-//     // Get the documents collection
-//     var db = db.db('fp');
-//     var collection = db.collection('test');
-
-//     // Find all students
-//     collection.find({company:"McKinsey"},{jobs:1}).toArray(function (err, result) {
-//       if (err) {
-//         console.log("Err: cannot find");
-//         // res.send(err);
-//       } else if (result.length) {
-//         var obj_str = util.inspect(result);
-//         console.log(obj_str);
-//         // res.render('crime',{
-//         //   "crime" : result
-//         // });
-//       } else {
-//         console.log("Warning: No such doc.");
-//         // res.send('No documents found');
-//       }
-//       //Close connection
-//     });
-//   }
-// });
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var util = require('util');
 /*-----------------------------------------------------*/
 var app = express();
 
@@ -98,15 +69,62 @@ app.get('/details', function (request, response) {
 app.get('/details/:name', function (request, response) {
   var name = request.params.name;
   name = decodeURI(name);
-  console.log(name);
   var query = " SELECT * " +
-              " FROM ( SELECT * FROM cis550fp.University WHERE univ_name = '" + name + "' ) a " +
+              " FROM ( SELECT * FROM cis550fp.University u WHERE univ_name = '" + name + "' ) a " +
               "      NATURAL JOIN cis550fp.Subject s NATURAL JOIN cis550fp.Crime c " +
-              "      JOIN cis550fp.Company com ON com.state = a.state " +
+              "      JOIN ( SELECT com.state, com.comp_name, com.city AS comp_city, com.industry, com.comp_url " +
+              "             FROM   cis550fp.Company com ) comp ON comp.state = a.state " +
               "      JOIN cis550fp.Living_cost lc ON lc.city = a.city;";
-  console.log(query);
+
   connection.query(query, function (err, result, fields) {
     if (err) throw err;
+    response.json(result);
+  });
+});
+
+app.get('/details/:comp_name/:haha',function(request,response){
+
+  var comp_name = request.params.comp_name;
+  MongoClient.connect("mongodb+srv://cis550:cis550@cis550-nosql-lkxnq.mongodb.net/test", function(err, db) {
+  if (err) {
+    console.log('Unable to connect to the Server', err);
+  } else {
+    // We are connected
+    console.log('Connection established to the mongoDB');
+
+    // Get the documents collection
+    var db = db.db('fp');
+    var collection = db.collection('test');
+    console.log(comp_name);
+    collection.aggregate([{$unwind:"$jobs"},{$match:{"company":comp_name}},{$project:{"jobs.job":1,"jobs.loc":1}}]).toArray(function (err, result) {
+      if (err) {
+        console.log("Err: cannot find");
+      } else if (result.length) {
+        var obj_str = util.inspect(result);
+
+        // response.send(JSON.stringify(obj_str));
+        response.json(result);
+      } else {
+        console.log("Warning: No such doc.");
+      }
+    });
+  }
+});
+});
+
+app.get('/universitylist/:state', function (request, response) {
+
+  var state = request.params.state;
+  state = abbrState(state, 'abbr');
+
+  var query = " SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url, state" +
+              " FROM cis550fp.University NATURAL JOIN cis550fp.Admission" +
+              " WHERE state = '" + state + "' " +
+              " ORDER BY rank; ";
+
+  connection.query(query, function (err, result, fields) {
+    if (err) throw err;
+
     response.json(result);
   });
 });
@@ -204,3 +222,76 @@ app.get('/tp.css', function (request, response){
 //   // The connection is terminated now
 //   console.log("Connection close");
 // });
+function abbrState(input, to){
+
+    var states = [
+        ['Arizona', 'AZ'],
+        ['Alabama', 'AL'],
+        ['Alaska', 'AK'],
+        ['Arizona', 'AZ'],
+        ['Arkansas', 'AR'],
+        ['California', 'CA'],
+        ['Colorado', 'CO'],
+        ['Connecticut', 'CT'],
+        ['Delaware', 'DE'],
+        ['Florida', 'FL'],
+        ['Georgia', 'GA'],
+        ['Hawaii', 'HI'],
+        ['Idaho', 'ID'],
+        ['Illinois', 'IL'],
+        ['Indiana', 'IN'],
+        ['Iowa', 'IA'],
+        ['Kansas', 'KS'],
+        ['Kentucky', 'KY'],
+        ['Kentucky', 'KY'],
+        ['Louisiana', 'LA'],
+        ['Maine', 'ME'],
+        ['Maryland', 'MD'],
+        ['Massachusetts', 'MA'],
+        ['Michigan', 'MI'],
+        ['Minnesota', 'MN'],
+        ['Mississippi', 'MS'],
+        ['Missouri', 'MO'],
+        ['Montana', 'MT'],
+        ['Nebraska', 'NE'],
+        ['Nevada', 'NV'],
+        ['New Hampshire', 'NH'],
+        ['New Jersey', 'NJ'],
+        ['New Mexico', 'NM'],
+        ['New York', 'NY'],
+        ['North Carolina', 'NC'],
+        ['North Dakota', 'ND'],
+        ['Ohio', 'OH'],
+        ['Oklahoma', 'OK'],
+        ['Oregon', 'OR'],
+        ['Pennsylvania', 'PA'],
+        ['Rhode Island', 'RI'],
+        ['South Carolina', 'SC'],
+        ['South Dakota', 'SD'],
+        ['Tennessee', 'TN'],
+        ['Texas', 'TX'],
+        ['Utah', 'UT'],
+        ['Vermont', 'VT'],
+        ['Virginia', 'VA'],
+        ['Washington', 'WA'],
+        ['West Virginia', 'WV'],
+        ['Wisconsin', 'WI'],
+        ['Wyoming', 'WY'],
+    ];
+
+    if (to == 'abbr'){
+        input = input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        for(i = 0; i < states.length; i++){
+            if(states[i][0] == input){
+                return(states[i][1]);
+            }
+        }
+    } else if (to == 'name'){
+        input = input.toUpperCase();
+        for(i = 0; i < states.length; i++){
+            if(states[i][1] == input){
+                return(states[i][0]);
+            }
+        }
+    }
+}

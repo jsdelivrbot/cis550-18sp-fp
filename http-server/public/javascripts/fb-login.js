@@ -1,4 +1,4 @@
-// Insert the following code snippet directly after the opening `<body>` tag on each page you want to use Facebook Analytics. 
+// Insert the following code snippet directly after the opening `<body>` tag on each page you want to use Facebook Analytics.
 // Replace `{your-app-id}` with the App ID and `{latest-api-version}` with the SDK version
 window.fbAsyncInit = function () {
     FB.init({
@@ -35,6 +35,7 @@ function statusChangeCallback(response) {
 function checkLoginState() {
     FB.getLoginStatus(function (response) {
         statusChangeCallback(response);
+        // console.log(response);
     });
 }
 
@@ -42,6 +43,9 @@ function testAPI() {
     FB.api('/me?fields=name,email,birthday,location', function (response) {
         if (response && !response.error) {
             console.log(response);
+            buildProfile(response);
+            // $window.sessionStorage.location = ${user.location};
+            console.log(response.location);
         }
     })
 }
@@ -52,9 +56,20 @@ function buildProfile(user) {
                 <ul class = "list-group">
                     <li class = "list-group-item">User ID: ${user.id}</li>
                     <li class = "list-group-item">Email: ${user.email}</li>
+                    <li class = "list-group-item">Location: ${user.location.name}</li>
                 </ul>
             `;
+    var a = user.location.name.split(",")[1];
+    a = a.substring(1);
+    console.log(a);
+    window.sessionStorage.state = a;
+    $("#profile").html(profile);
+    $(".list-group").css("background-color", "white");
+    $(".list-group-item").css("background-color", "white");
+    $(".list-group-item").css("font-size", "10px");
+    $(".list-group-item").css("color", "rgba(50,20,130,0.5)");
 }
+
 function selELements(isLoggedIn) {
     if (isLoggedIn) {
         document.getElementById('profile').style.display = 'block';

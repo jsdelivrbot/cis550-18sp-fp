@@ -29,6 +29,10 @@ app.controller('detailController', function ($scope, $http, $window) {
     }
   );
 
+  $("#try2").hide();
+  $("#con2").hide();
+  $("#try1").show();
+  $("#con1").show();
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
 
@@ -43,6 +47,25 @@ app.controller('detailController', function ($scope, $http, $window) {
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
     chart.draw(chartdata);
   }
+
+  $scope.findCompany = function (index) {
+    $window.sessionStorage.comp_name = $scope.data2[index].comp_name;
+    $window.sessionStorage.haha = "nihao";
+    console.log($window.sessionStorage.comp_name);
+    $http.get('/details/' + $window.sessionStorage.comp_name + '/' + $window.sessionStorage.haha).then(
+      function (response) {
+        $scope.data3 = response.data;
+        // $(".try").css("height", "200px");
+        // $("#try2").css("margin-top", "30px");
+        $("#try1").hide();
+        $("#con1").hide();
+        $("#try2").show();
+        $("#con2").show();
+      }, function (response) {
+        console.log('err');
+      }
+    );
+  };
 });
 
 app.controller('tempController', function ($scope, $http, $window) {
@@ -69,6 +92,21 @@ app.controller('tempController', function ($scope, $http, $window) {
     $http.get('/details').then();
     window.location = '/details';
   };
+
+  $scope.state = function () {
+    $http.get('/universitylist/' + $window.sessionStorage.state).then(
+      function (response) {
+        $scope.data = response.data;
+      }, function (response) {
+        console.log('err');
+    });
+    $('#total_number_h').text('');
+    $('#total_number').hide();
+    $('#living_cost_h').text('');
+    $('#living_cost').hide();
+    $('#company_num_h').text('');
+    $('#company_num').hide();
+  }
 
   $scope.rank = function () {
     $window.sessionStorage.sort = '1';

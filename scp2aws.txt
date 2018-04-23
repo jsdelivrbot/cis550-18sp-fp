@@ -1,0 +1,1 @@
+scp -i ~/.ssh/550-application.pem -r /Users/kxd/Downloads/http ec2-user@ec2-18-221-224-215.us-east-2.compute.amazonaws.com:~/.
