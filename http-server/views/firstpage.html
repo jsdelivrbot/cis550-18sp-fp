@@ -4,14 +4,12 @@
 <head>
     <title>U.S. university selection</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://localhost:5000/fp.css">
-    <link rel="stylesheet" type="text/css" href="https://localhost:5000/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/fp.css">
+    <link rel="stylesheet" type="text/css" href="/sidebar.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/app.js" type="text/javascript"></script>
     <script src="/fb-login.js" type="text/javascript"></script>
-
-
 </head>
 
 <body>
@@ -22,10 +20,6 @@
 
     <!-- Side navigation -->
     <div class="sidenav">
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
         <a id="logout" href="#" onclick="logout()">Logout</a>
         <a>
             <fb:login-button id="fb-btn" size="large" scope="public_profile,email,user_location" onlogin="checkLoginState();">
@@ -33,9 +27,17 @@
         </a>
         <a>
             <div id="profile">
-
             </div>
         </a>
+
+        <!-- <a href="#">About Us</a> -->
+
+        <div ng-controller="MyController">
+            <a ng-click="ShowHide()"> About Us </a>
+            <br />
+            <br />
+            <div id = "about-us" ng-show="IsVisible">CIS550<br>---------<br> Fan Chen<br>Da Kuang<br>Yitong Long<br>Zexi Yu</div>
+        </div>
     </div>
 
     <!-- Page content -->

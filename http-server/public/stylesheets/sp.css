@@ -1,7 +1,3 @@
-body {
-	/* background-color: silver; */
-}
-
 h1 {
 	font-size: 30px;
   font-family: Impact, Charcoal, sans-serif;
@@ -22,11 +18,11 @@ h1 {
 	width: 1000px;
 	text-align: left;
 	border-collapse: collapse;
-	background: url('https://localhost:5000/patternb.png');
+	background: url('/patternb.png');
 }
 #univ_table thead tr
 {
-	background: url('https://localhost:5000/patternb-head.png');
+	background: url('/patternb-head.png');
 }
 #univ_table th
 {

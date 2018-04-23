@@ -1,4 +1,13 @@
 var app = angular.module('USuniversity', []);
+// Used in first page to hide about us
+app.controller('MyController', function ($scope) {
+  //This will hide the DIV by default.
+  $scope.IsVisible = false;
+  $scope.ShowHide = function () {
+      //If DIV is visible it will be hidden and vice versa.
+      $scope.IsVisible = $scope.IsVisible ? false : true;
+  }
+});
 
 app.controller('searchController', function ($scope, $http, $window) {
   $scope.Submit = function () {

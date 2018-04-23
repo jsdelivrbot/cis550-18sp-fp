@@ -4,6 +4,39 @@ var pem = require('pem')
 var express = require('express');
 var path = require('path');
 var mysql = require('mysql');
+var MongoClient = require('mongodb').MongoClient;
+var util = require("util");
+
+// MongoClient.connect("mongodb+srv://cis550:cis550@cis550-nosql-lkxnq.mongodb.net/test", function(err, db) {
+//   if (err) {
+//     console.log('Unable to connect to the Server', err);
+//   } else {
+//     // We are connected
+//     console.log('Connection established to the mongoDB');
+ 
+//     // Get the documents collection
+//     var db = db.db('fp');
+//     var collection = db.collection('test');
+
+//     // Find all students
+//     collection.find({company:"McKinsey"},{jobs:1}).toArray(function (err, result) {
+//       if (err) {
+//         console.log("Err: cannot find");
+//         // res.send(err);
+//       } else if (result.length) {
+//         var obj_str = util.inspect(result);
+//         console.log(obj_str);
+//         // res.render('crime',{
+//         //   "crime" : result
+//         // });
+//       } else {
+//         console.log("Warning: No such doc.");
+//         // res.send('No documents found');
+//       }
+//       //Close connection
+//     });
+//   }
+// });
 /*-----------------------------------------------------*/
 var app = express();
 
@@ -142,6 +175,7 @@ app.get('/fb-login.css', function (request, response){
 });
 
 app.get('/sp.css', function (request, response){
+  console.log("sending second page file");
   response.sendFile(path.join(__dirname, '/public/stylesheets', 'sp.css'));
 });
 
