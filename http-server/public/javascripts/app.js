@@ -90,7 +90,13 @@ app.controller('tempController', function ($scope, $http, $window) {
         $scope.data = response.data;
       }, function (response) {
         console.log('err');
-      });
+    });
+    $('#total_number_h').text('');
+    $('#total_number').hide();
+    $('#living_cost_h').text('');
+    $('#living_cost').hide();
+    $('#company_num_h').text('');
+    $('#company_num').hide();
   }
 
   $scope.rank = function () {
