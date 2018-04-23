@@ -56,11 +56,16 @@ function buildProfile(user) {
                 <ul class = "list-group">
                     <li class = "list-group-item">User ID: ${user.id}</li>
                     <li class = "list-group-item">Email: ${user.email}</li>
+                    <li class = "list-group-item">Location: ${user.location.name}</li>
                 </ul>
             `;
+    var a = user.location.name.split(",")[1];
+    a = a.substring(1);
+    console.log(a);
+    window.sessionStorage.state = a;
     $("#profile").html(profile);
-    $(".list-group").css("background-color", "rgba(50,20,130,0.5)");
-    $(".list-group-item").css("background-color", "rgba(50,20,130,0.5)");
+    $(".list-group").css("background-color", "white");
+    $(".list-group-item").css("background-color", "white");
     $(".list-group-item").css("font-size", "10px");
     $(".list-group-item").css("color", "rgba(50,20,130,0.5)");
 }

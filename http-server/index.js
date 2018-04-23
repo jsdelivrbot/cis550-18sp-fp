@@ -82,7 +82,7 @@ app.get('/details/:name', function (request, response) {
 });
 
 app.get('/details/:comp_name/:haha',function(request,response){
-  console.log("nihao");
+
   var comp_name = request.params.comp_name;
   MongoClient.connect("mongodb+srv://cis550:cis550@cis550-nosql-lkxnq.mongodb.net/test", function(err, db) {
   if (err) {
@@ -100,7 +100,7 @@ app.get('/details/:comp_name/:haha',function(request,response){
         console.log("Err: cannot find");
       } else if (result.length) {
         var obj_str = util.inspect(result);
-        console.log(obj_str);
+
         // response.send(JSON.stringify(obj_str));
         response.json(result);
       } else {
@@ -109,6 +109,23 @@ app.get('/details/:comp_name/:haha',function(request,response){
     });
   }
 });
+});
+
+app.get('/universitylist/:state', function (request, response) {
+
+  var state = request.params.state;
+  state = abbrState(state, 'abbr');
+
+  var query = " SELECT univ_name, rank, city, adm_rate, sat_avg, univ_url, state" +
+              " FROM cis550fp.University NATURAL JOIN cis550fp.Admission" +
+              " WHERE state = '" + state + "' " +
+              " ORDER BY rank; ";
+
+  connection.query(query, function (err, result, fields) {
+    if (err) throw err;
+
+    response.json(result);
+  });
 });
 
 app.get('/universitylist/:sat/:upperLimit/:lowerLimit/:sort', function (request, response) {
@@ -203,3 +220,76 @@ app.get('/tp.css', function (request, response){
 //   // The connection is terminated now
 //   console.log("Connection close");
 // });
+function abbrState(input, to){
+
+    var states = [
+        ['Arizona', 'AZ'],
+        ['Alabama', 'AL'],
+        ['Alaska', 'AK'],
+        ['Arizona', 'AZ'],
+        ['Arkansas', 'AR'],
+        ['California', 'CA'],
+        ['Colorado', 'CO'],
+        ['Connecticut', 'CT'],
+        ['Delaware', 'DE'],
+        ['Florida', 'FL'],
+        ['Georgia', 'GA'],
+        ['Hawaii', 'HI'],
+        ['Idaho', 'ID'],
+        ['Illinois', 'IL'],
+        ['Indiana', 'IN'],
+        ['Iowa', 'IA'],
+        ['Kansas', 'KS'],
+        ['Kentucky', 'KY'],
+        ['Kentucky', 'KY'],
+        ['Louisiana', 'LA'],
+        ['Maine', 'ME'],
+        ['Maryland', 'MD'],
+        ['Massachusetts', 'MA'],
+        ['Michigan', 'MI'],
+        ['Minnesota', 'MN'],
+        ['Mississippi', 'MS'],
+        ['Missouri', 'MO'],
+        ['Montana', 'MT'],
+        ['Nebraska', 'NE'],
+        ['Nevada', 'NV'],
+        ['New Hampshire', 'NH'],
+        ['New Jersey', 'NJ'],
+        ['New Mexico', 'NM'],
+        ['New York', 'NY'],
+        ['North Carolina', 'NC'],
+        ['North Dakota', 'ND'],
+        ['Ohio', 'OH'],
+        ['Oklahoma', 'OK'],
+        ['Oregon', 'OR'],
+        ['Pennsylvania', 'PA'],
+        ['Rhode Island', 'RI'],
+        ['South Carolina', 'SC'],
+        ['South Dakota', 'SD'],
+        ['Tennessee', 'TN'],
+        ['Texas', 'TX'],
+        ['Utah', 'UT'],
+        ['Vermont', 'VT'],
+        ['Virginia', 'VA'],
+        ['Washington', 'WA'],
+        ['West Virginia', 'WV'],
+        ['Wisconsin', 'WI'],
+        ['Wyoming', 'WY'],
+    ];
+
+    if (to == 'abbr'){
+        input = input.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        for(i = 0; i < states.length; i++){
+            if(states[i][0] == input){
+                return(states[i][1]);
+            }
+        }
+    } else if (to == 'name'){
+        input = input.toUpperCase();
+        for(i = 0; i < states.length; i++){
+            if(states[i][1] == input){
+                return(states[i][0]);
+            }
+        }
+    }
+}

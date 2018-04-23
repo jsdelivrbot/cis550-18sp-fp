@@ -84,6 +84,15 @@ app.controller('tempController', function ($scope, $http, $window) {
     window.location = '/details';
   };
 
+  $scope.state = function () {
+    $http.get('/universitylist/' + $window.sessionStorage.state).then(
+      function (response) {
+        $scope.data = response.data;
+      }, function (response) {
+        console.log('err');
+      });
+  }
+
   $scope.rank = function () {
     $window.sessionStorage.sort = '1';
     httpGet();
