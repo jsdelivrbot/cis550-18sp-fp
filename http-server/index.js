@@ -4,6 +4,9 @@ var pem = require('pem')
 var express = require('express');
 var path = require('path');
 var mysql = require('mysql');
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var util = require('util');
 /*-----------------------------------------------------*/
 var app = express();
 
@@ -78,26 +81,28 @@ app.get('/details/:name', function (request, response) {
   });
 });
 
-app.get('/company',function(request,response){
-	
+app.get('/details/:comp_name/:haha',function(request,response){
+  console.log("nihao");
+  var comp_name = request.params.comp_name;
   MongoClient.connect("mongodb+srv://cis550:cis550@cis550-nosql-lkxnq.mongodb.net/test", function(err, db) {
   if (err) {
     console.log('Unable to connect to the Server', err);
   } else {
     // We are connected
     console.log('Connection established to the mongoDB');
- 
+
     // Get the documents collection
     var db = db.db('fp');
     var collection = db.collection('test');
-	
-    collection.aggregate([{$unwind:"$jobs"},{$match:{"company":"$(this).comp_name"}},{$project:{"jobs.job":1,"jobs.loc":1}}]).toArray(function (err, result) {
+    console.log(comp_name);
+    collection.aggregate([{$unwind:"$jobs"},{$match:{"company":comp_name}},{$project:{"jobs.job":1,"jobs.loc":1}}]).toArray(function (err, result) {
       if (err) {
         console.log("Err: cannot find");
       } else if (result.length) {
         var obj_str = util.inspect(result);
         console.log(obj_str);
-        response.send(JSON.stringify(obj_str));
+        // response.send(JSON.stringify(obj_str));
+        response.json(result);
       } else {
         console.log("Warning: No such doc.");
       }

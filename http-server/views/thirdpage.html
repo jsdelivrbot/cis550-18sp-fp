@@ -43,10 +43,10 @@
         <p id="content2"> The crime number of this school is: {{data2[0].total_number}} </p>
       </div>
 
-      <div class="item">
-        <p class="title1"> Company </p>
-        <div class="try">
-        <table id="comp">
+      <div class="item" id="lalala">
+        <p class="title1" id="con1"> Company </p>
+        <div class="try" id="try1">
+        <table class="comp">
           <thead>
             <tr>
               <th id="comp_name_h" display="inline" scope="col"> Company Name </th>
@@ -58,7 +58,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="x in data2">
-              <td id="comp_name" display="inline"> <a onclick="findCompany"> {{x.comp_name}} </a> </td>
+              <td id="comp_name" display="inline"> <a ng-click="findCompany($index)"> {{x.comp_name}} </a> </td>
               <td id="state" display="inline"> {{x.state}} </td>
               <td id="city" display="inline"> {{x.comp_city}} </td>
               <td id="industry" display="inline"> {{x.industry}} </td>
@@ -68,7 +68,24 @@
             </tr>
           </tbody>
       </table>
-    </div>
+      </div>
+      <p class="title1" id="con2"> Jobs </p>
+      <div class="try" id="try2">
+        <table class="comp" id="pos">
+          <thead>
+            <tr>
+              <th display="inline"> Job </th>
+              <th display="inline"> Location </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="y in data3">
+              <td id="job"> {{y.jobs.job}} </td>
+              <td id="location"> {{y.jobs.loc}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       </div>
 
       <div class="item">
