@@ -1,1 +1,15 @@
 scp -i ~/.ssh/550-application.pem -r /Users/kxd/Downloads/http ec2-user@ec2-18-221-224-215.us-east-2.compute.amazonaws.com:~/.
+ssh -i ~/.ssh/550-application.pem ec2-18-188-240-250.us-east-2.compute.amazonaws.com
+https://ec2-user@ec2-18-221-224-215.us-east-2.compute.amazonaws.com:5000
+
+ec2-18-221-224-215.us-east-2.compute.amazonaws.com:5000
+http://localhost:5000/login
+
+
+ssh -i cis550_new_key.pem ec2-18-219-144-111.us-east-2.compute.amazonaws.com
+
+ssh -i ~/.ssh/550-application.pem ec2-user@ec2-18-188-240-250.us-east-2.compute.amazonaws.com
+ssh -i myKey.pem ec2-user@ec2-18-188-216-182.us-east-2.compute.amazonaws.com
+
+-----------------------
+ssh -i ~/.ssh/550-application.pem ec2-user@ec2-18-188-240-250.us-east-2.compute.amazonaws.com
