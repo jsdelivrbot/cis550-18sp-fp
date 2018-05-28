@@ -13,3 +13,4 @@ ssh -i myKey.pem ec2-user@ec2-18-188-216-182.us-east-2.compute.amazonaws.com
 
 -----------------------
 ssh -i ~/.ssh/550-application.pem ec2-user@ec2-18-188-240-250.us-east-2.compute.amazonaws.com
+https://ec2-18-188-240-250.us-east-2.compute.amazonaws.com:5000/
